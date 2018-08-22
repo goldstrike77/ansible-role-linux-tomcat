@@ -1,0 +1,24 @@
+---
+- include_vars: '{{ ansible_os_family }}.yml'
+
+- include: '{{ ansible_os_family }}.yml'
+
+- include: 'install.yml'
+
+- include: 'configureation.yml'
+
+- include: 'harden.yml'
+  when: tomcat_update|changed
+
+- name: Configure the tomcat firewall
+  shell: echo ''
+  notify: 'Service firewalld operation'
+  when: config_upgrade|changed
+
+- name: Reload the tomcat service
+  shell: echo ''
+  notify: 'Ensure tomcat service is enabled'
+  when: tomcat_upgrade|changed or config_upgrade|changed or pki_upgrade|changed
+
+- name: Force the handler to run immediately
+  meta: flush_handlers

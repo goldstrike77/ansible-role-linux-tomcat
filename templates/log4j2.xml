@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout pattern="%-5p - %m%n"/>
+        </Console>
+{% if syslog %}
+        <Gelf name="gelf" host="udp:{{ syslog_server }}" port="{{ syslog_port }}" version="1.0" extractStackTrace="true"
+              filterStackTrace="true" mdcProfiling="true" includeFullMdc="true" maximumMessageSize="8192" 
+              originHost="%host{fqdn}" additionalFieldTypes="fieldName1=String,fieldName2=Double,fieldName3=Long"
+              ignoreExceptions="true">
+            <Field name="className" pattern="%C" />
+            <Field name="fieldName2" literal="fieldValue2" />
+            <Field name="mdcField2" mdc="mdcField2" />
+            <DynamicMdcFields regex="mdc.*" />
+            <DynamicMdcFields regex="(mdc|MDC)fields" />
+        </Gelf>
+{% endif %}
+    </Appenders>
+    <Loggers>
+        <Root level="INFO" includeLocation="false">
+            <AppenderRef ref="STDOUT"/>
+{% if syslog %}
+            <AppenderRef ref="gelf" />
+{% endif %}
+        </Root>
+    </Loggers>
+</Configuration>

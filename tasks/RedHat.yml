@@ -1,0 +1,5 @@
+---
+- name: Install the dependent packages
+  yum:
+    name: '{{ ",".join(vars["dependent_packages"]) }}'
+    state: present

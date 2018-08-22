@@ -1,0 +1,36 @@
+---
+- name: Hidden tomcat version number
+  block:
+    - name: Uncompass the catalina Java ARchive
+      unarchive:
+        src: '{{ tomcat_path }}/lib/catalina.jar'
+        dest: '{{ tomcat_path }}/lib'
+        remote_src: yes
+    - name: Erase tomcat version
+      lineinfile:
+        state: present
+        dest: '{{ tomcat_path }}/lib/org/apache/catalina/util/ServerInfo.properties'
+        regexp: '{{ item.regexp }}'
+        line: '{{ item.line }}'
+      with_items:
+        - { regexp: '^server.info',   line: 'server.info=' }
+        - { regexp: '^server.number', line: 'server.number=' }
+        - { regexp: '^server.built',  line: 'server.built=' }
+    - name: Compass the catalina Java ARchive 
+      shell: 'cd {{ tomcat_path }}/lib && jar cf catalina.jar META-INF/ org/'
+    - name: Cleanup the uncompass file
+      file:
+        state: absent
+        path: "{{ item }}"
+      with_items:
+        - '{{ tomcat_path }}/lib/org'
+        - '{{ tomcat_path }}/lib/META-INF'
+
+- name: Restrict access to tomcat directory
+  file:
+    path: '{{ item }}'
+    owner: '{{ tomcat_user }}'
+    group: '{{ tomcat_user }}'
+    mode: 'o-rwx'
+  with_items:
+    - '{{ restrict_path }}'

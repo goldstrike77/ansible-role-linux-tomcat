@@ -1,0 +1,40 @@
+---
+- name: Configuration file transfer
+  template:
+    src: '{{ item }}'
+    dest: '{{ tomcat_path }}/conf/'
+    owner: '{{ tomcat_user }}'
+    group: '{{ tomcat_user }}'
+    mode: 0600
+  with_items:
+    - '{{ tomcat_conf }}'
+  register: config_upgrade
+
+- name: Server certificate file transfer
+  copy:
+    src: '{{ item }}'
+    dest: '{{ tomcat_path }}/conf/'
+    owner: '{{ tomcat_user }}'
+    group: '{{ tomcat_user }}'
+    mode: 0600
+  with_items:
+    - '{{ server_certificate }}'
+  tags:
+    - 'server_certificate_file'
+  register: pki_upgrade
+
+- name: Systemd service file transfer
+  template:
+    src: 'tomcat.service'
+    dest: '/etc/systemd/system'
+    owner: 'root'
+    group: 'root'
+    mode: 0644
+
+- name: Test page transfer
+  copy:
+    src: 'index.html'
+    dest: '{{ tomcat_path }}/webapps/ROOT/'
+    owner: '{{ tomcat_user }}'
+    group: '{{ tomcat_user }}'
+    mode: 0644

@@ -1,0 +1,7 @@
+---
+disable_gpg_check: yes
+
+dependent_packages:
+  - 'java-1.8.0-openjdk'
+  - 'java-1.8.0-openjdk-devel'
+  - 'tomcat-native'

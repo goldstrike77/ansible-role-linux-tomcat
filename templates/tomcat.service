@@ -1,0 +1,18 @@
+[Unit]
+Description=Tomcat Application Server
+After=syslog.target
+
+[Service]
+Type=forking
+ExecStart={{ tomcat_path }}/bin/tomcat.init start sysd
+ExecStop={{ tomcat_path }}/bin/tomcat.init stop sysd
+User={{ tomcat_user }}
+LimitNOFILE={{ ulimit_nproc }}
+LimitNPROC={{ ulimit_nofile }}
+LimitCORE=infinity
+LimitMEMLOCK=infinity
+KillMode=control-group
+Environment=SYSTEMD_KILLMODE_WARNING=true
+
+[Install]
+WantedBy=multi-user.target
