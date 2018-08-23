@@ -7,6 +7,8 @@ tomcat_port: '1025-65535'
 tomcat_path: '/data/tomcat'
 tomcat_web_protect: true
 tomcat_cookie_protect: true
+tomcat_lc_ctype: 'zh_CN.UTF-8'
+tomcat_timezone: 'Asia/Shanghai'
 syslog: true
 syslog_server: '1.1.1.1'
 syslog_port: '12209'
