@@ -48,7 +48,7 @@ tomcat_environment:
   - 'export CATALINA_HOME={{ tomcat_path }}'
   - 'export CLASSPATH={{ java_home }}/jre/lib:{{ java_home }}/lib:{{ java_home }}/lib/tools.jar'
   - 'export CLASSPATH=$CLASSPATH:{{ tomcat_path }}/lib:.'
-  - 'export LC_CTYPE="zh_CN.UTF-8"'
+  - 'export LC_CTYPE="{{ tomcat_lc_ctype }}"'
 
 restrict_path:
   - '{{ tomcat_path }}/bin'
