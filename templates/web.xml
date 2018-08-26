@@ -593,7 +593,7 @@
   <!-- created sessions by modifying the value below.                       -->
 
     <session-config>
-        <session-timeout>{{ session_timeout }}</session-timeout>
+        <session-timeout>{{ tomcat_session_timeout }}</session-timeout>
 {% if tomcat_cookie_protect %}
         <cookie-config>
             <http-only>true</http-only>

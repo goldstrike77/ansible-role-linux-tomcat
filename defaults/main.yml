@@ -1,6 +1,5 @@
 ---
 #tomcat_version: '8.0.53'
-java_home: '/usr/lib/jvm/java'
 tomcat_user: 'tomcat'
 tomcat_uid: '2001'
 tomcat_port: '1025-65535'
@@ -9,14 +8,13 @@ tomcat_web_protect: true
 tomcat_cookie_protect: true
 tomcat_lc_ctype: 'zh_CN.UTF-8'
 tomcat_timezone: 'Asia/Shanghai'
+tomcat_session_timeout: '10'
+tomcat_ulimit_nproc: '10240'
+tomcat_ulimit_nofile: '10240'
+tomcat_ulimit_core: 'unlimited'
+tomcat_soft_url: 'http://mirrors.tuna.tsinghua.edu.cn/apache/tomcat/tomcat-'
+java_home: '/usr/lib/jvm/java'
+system_service: '/lib/systemd/system'
 syslog: true
 syslog_server: '1.1.1.1'
 syslog_port: '12209'
-session_timeout: '10'
-ulimit_nproc: '10240'
-ulimit_nofile: '10240'
-ulimit_core: 'unlimited'
-
-system_service: '/lib/systemd/system'
-
-tomcat_soft_url: 'http://mirrors.tuna.tsinghua.edu.cn/apache/tomcat/tomcat-'
