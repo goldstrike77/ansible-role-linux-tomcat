@@ -12,7 +12,6 @@ tomcat_session_timeout: '10'
 tomcat_ulimit_nproc: '10240'
 tomcat_ulimit_nofile: '10240'
 tomcat_ulimit_core: 'unlimited'
-tomcat_soft_url: 'http://mirrors.tuna.tsinghua.edu.cn/apache/tomcat/tomcat-'
 java_home: '/usr/lib/jvm/java'
 system_service: '/lib/systemd/system'
 syslog: true

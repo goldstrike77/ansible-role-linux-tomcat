@@ -1,4 +1,6 @@
 ---
+tomcat_soft_url: 'http://mirrors.tuna.tsinghua.edu.cn/apache/tomcat/tomcat-'
+
 tomcat_exclusions:
   - 'bin/commons-daemon-native.tar.gz'
   - 'bin/shutdown.sh'
