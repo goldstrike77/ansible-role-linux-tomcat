@@ -34,16 +34,6 @@
     - ansible_distribution_major_version|int > 6
     - ansible_os_family == 'RedHat'
 
-- name: Tomcat service scripts file transfer
-  template:
-    src: "tomcat.init"
-    dest: '{{ tomcat_path }}/bin/'
-    owner: 'root'
-    group: 'root'
-    mode: 0755
-  when:
-    - ansible_os_family == 'RedHat'  
-
 - name: Tomcat service scripts symlink
   file:
     src: '{{ tomcat_path }}/bin/tomcat.init'

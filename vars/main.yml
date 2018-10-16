@@ -32,6 +32,7 @@ support_jars:
 
 support_binary:
   - 'wrapper'
+  - 'tomcat.init'
 
 tomcat_conf:
   - 'log4j2.xml'
