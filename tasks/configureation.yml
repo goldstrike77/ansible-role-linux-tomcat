@@ -36,7 +36,7 @@
 
 - name: Tomcat service scripts file transfer
   template:
-    src: 'tomcat.init'
+    src: "tomcat.init"
     dest: '{{ tomcat_path }}/bin/'
     owner: 'root'
     group: 'root'
