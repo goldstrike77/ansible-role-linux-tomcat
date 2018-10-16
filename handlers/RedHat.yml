@@ -30,7 +30,7 @@
 
 - name: Enable tomcat service
   service:
-    name: 'tomcat.init'
+    name: 'tomcat'
     enabled: yes
     state: restarted
   async: 1
