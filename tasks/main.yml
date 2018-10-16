@@ -5,17 +5,15 @@
 - name: Include tasks for specific OS
   include: '{{ ansible_os_family }}.yml'
 
+- name: Configure the tomcat firewall
+  include: 'firewall.yml'
+
 - include: 'install.yml'
 
 - include: 'configureation.yml'
 
 - include: 'harden.yml'
   when: tomcat_update|changed
-
-- name: Configure the tomcat firewall
-  shell: echo ''
-  notify: 'Service firewalld operation'
-  when: config_upgrade|changed
 
 - name: Reload the tomcat service
   shell: echo ''
