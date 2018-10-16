@@ -1,5 +1,5 @@
 ---
-- name: Configuration file transfer
+- name: Tomcat configuration file transfer
   template:
     src: '{{ item }}'
     dest: '{{ tomcat_path }}/conf/'
@@ -10,7 +10,7 @@
     - '{{ tomcat_conf }}'
   register: config_upgrade
 
-- name: Server certificate file transfer
+- name: Tomcat server certificate file transfer
   copy:
     src: '{{ item }}'
     dest: '{{ tomcat_path }}/conf/'
@@ -23,7 +23,7 @@
     - 'server_certificate_file'
   register: pki_upgrade
 
-- name: Systemd service file transfer
+- name: Tomcat systemd service file transfer
   template:
     src: 'tomcat.service'
     dest: '/etc/systemd/system'
@@ -34,16 +34,24 @@
     - ansible_distribution_major_version|int > 6
     - ansible_os_family == 'RedHat'
 
-- name: Service scripts file transfer
+- name: Tomcat service scripts file transfer
   template:
     src: 'tomcat.init'
-    dest: '/etc/init.d'
+    dest: '{{ tomcat_path }}/bin/'
     owner: 'root'
     group: 'root'
     mode: 0755
   when:
-    - ansible_distribution_major_version|int < 7
     - ansible_os_family == 'RedHat'  
+
+- name: Tomcat service scripts symlink
+  file:
+    src: '{{ tomcat_path }}/bin/tomcat.init'
+    path: /etc/init.d/tomcat
+    state: link
+  when:
+    - ansible_distribution_major_version|int < 7
+    - ansible_os_family == 'RedHat'
 
 - name: Test page transfer
   copy:
