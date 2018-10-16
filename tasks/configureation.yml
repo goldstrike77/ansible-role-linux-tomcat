@@ -30,6 +30,20 @@
     owner: 'root'
     group: 'root'
     mode: 0644
+  when:
+    - ansible_distribution_major_version|int > 6
+    - ansible_os_family == 'RedHat'
+
+- name: Service scripts file transfer
+  template:
+    src: 'tomcat.init'
+    dest: '/etc/init.d'
+    owner: 'root'
+    group: 'root'
+    mode: 0755
+  when:
+    - ansible_distribution_major_version|int < 7
+    - ansible_os_family == 'RedHat'  
 
 - name: Test page transfer
   copy:

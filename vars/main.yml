@@ -31,7 +31,6 @@ support_jars:
   - 'wrapper.jar'
 
 support_binary:
-  - 'tomcat.init'
   - 'wrapper'
 
 tomcat_conf:
