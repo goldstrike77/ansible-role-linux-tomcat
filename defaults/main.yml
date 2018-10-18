@@ -8,7 +8,14 @@ syslog_server: '1.1.1.1'
 syslog_port: '12209'
 
 # Listen port #
-tomcat_port: '1025-65535'
+tomcat_port:
+  http_connectors: '8080' # HTTP connectors
+  https_connectors: '8443' # HTTPs connectors
+  rmiRegistryPortPlatform: '10201' # The port to be used by the JMX/RMI registry for the Platform MBeans
+  rmiServerPortPlatform: '10202' # The port to be used by the Platform JMX/RMI server
+  prometheus_javaagent: '20201' # Prometheus jmx_exporter port
+  wrapper: '31000-31999' # A socket to communicate with its Java component running inside a JVM
+  wrapper_jvm: '32000-32999' # A socket to communicate with its Java component running inside a JVM
 
 # Server System Variables #
 tomcat_cookie_protect: true # Set-Cookie HttpOnly & Secure response header

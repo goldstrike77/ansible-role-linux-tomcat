@@ -1,18 +1,20 @@
 ---
 - name: Allow tomcat service port
   firewalld:
-    port: '{{ tomcat_port }}/tcp'
+    port: '{{ item.value }}/tcp'
     permanent: 'true'
     state: 'enabled'
+  with_dict: '{{ tomcat_port }}'
   register: firewalld_update
   when: ansible_distribution_major_version|int > 6
 
 - name: Allow tomcat service port
   lineinfile:
     dest: '/etc/sysconfig/iptables'
-    regexp: '^-A INPUT -p tcp -m tcp --dport {{ tomcat_port | regex_replace("-", ":") }} -j ACCEPT$'
-    line: '-A INPUT -p tcp -m tcp --dport {{ tomcat_port | regex_replace("-", ":") }} -j ACCEPT'
+    regexp: '^-A INPUT -p tcp -m tcp --dport {{ item.value | regex_replace("-", ":") }} -j ACCEPT$'
+    line: '-A INPUT -p tcp -m tcp --dport {{ item.value | regex_replace("-", ":") }} -j ACCEPT'
     insertafter: '^:OUTPUT ACCEPT \[\d*:\d*\]$'
+  with_dict: '{{ tomcat_port }}'
   register: firewalld_update
   when: ansible_distribution_major_version|int < 7
 
