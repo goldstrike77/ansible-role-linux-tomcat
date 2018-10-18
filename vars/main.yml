@@ -47,19 +47,19 @@ server_certificate:
 tomcat_environment:
   - 'export JAVA_HOME={{ java_home }}'
   - 'export PATH=$PATH:{{ java_home }}/bin'
-  - 'export CATALINA_HOME={{ tomcat_path }}'
+  - 'export CATALINA_HOME={{ tomcat_arg.path }}'
   - 'export CLASSPATH={{ java_home }}/jre/lib:{{ java_home }}/lib:{{ java_home }}/lib/tools.jar'
-  - 'export CLASSPATH=$CLASSPATH:{{ tomcat_path }}/lib:.'
-  - 'export LC_CTYPE="{{ tomcat_lc_ctype }}"'
+  - 'export CLASSPATH=$CLASSPATH:{{ tomcat_arg.path }}/lib:.'
+  - 'export LC_CTYPE="{{ tomcat_arg.lc_ctype }}"'
 
 restrict_path:
-  - '{{ tomcat_path }}/bin'
-  - '{{ tomcat_path }}/logs'
-  - '{{ tomcat_path }}/temp'
-  - '{{ tomcat_path }}/webapps'
+  - '{{ tomcat_arg.path }}/bin'
+  - '{{ tomcat_arg.path }}/logs'
+  - '{{ tomcat_arg.path }}/temp'
+  - '{{ tomcat_arg.path }}/webapps'
 
 service_privilege:
-  - '%{{ tomcat_user }} {{ inventory_hostname }}=/usr/bin/systemctl restart tomcat.service'
-  - '%{{ tomcat_user }} {{ inventory_hostname }}=/usr/bin/systemctl stop tomcat.service'
-  - '%{{ tomcat_user }} {{ inventory_hostname }}=/usr/bin/systemctl start tomcat.service'
-  - '%{{ tomcat_user }} {{ inventory_hostname }}=/usr/bin/systemctl status tomcat.service'
+  - '%{{ tomcat_arg.user }} {{ inventory_hostname }}=/usr/bin/systemctl restart tomcat.service'
+  - '%{{ tomcat_arg.user }} {{ inventory_hostname }}=/usr/bin/systemctl stop tomcat.service'
+  - '%{{ tomcat_arg.user }} {{ inventory_hostname }}=/usr/bin/systemctl start tomcat.service'
+  - '%{{ tomcat_arg.user }} {{ inventory_hostname }}=/usr/bin/systemctl status tomcat.service'
