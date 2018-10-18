@@ -20,7 +20,7 @@ tomcat_port:
 # Server System Variables #
 tomcat_arg:
   cookie_protect: 'true' # Set-Cookie HttpOnly & Secure response header
-  ipv6: 'false' # Accept IPv6 socket connect If IPv6 is available on the operating system
+  disable_ipv6: 'true' # Accept IPv6 socket connect If IPv6 is available on the operating system
   jmxremote: 'true' # Enabling JMX Remote function
   jvm_heapdumppath: '/tmp' # Heap dump folder
   jvm_security_egd: '/dev/urandom' # Random number generation library
