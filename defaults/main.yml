@@ -11,16 +11,21 @@ syslog_port: '12209'
 tomcat_port:
   http_connectors: '8080' # HTTP connectors
   https_connectors: '8443' # HTTPs connectors
-  rmiRegistryPortPlatform: '10201' # The port to be used by the JMX/RMI registry for the Platform MBeans
-  rmiServerPortPlatform: '10202' # The port to be used by the Platform JMX/RMI server
-  prometheus_javaagent: '20201' # Prometheus jmx_exporter port
+  prometheus_javaagent: '20201' # Prometheus jmx_exporter port  
+  rmi_port: '10201-10202' # The port to be used by the JMX/RMI registry for the Platform server
   wrapper: '31000-31999' # A socket to communicate with its Java component running inside a JVM
   wrapper_jvm: '32000-32999' # A socket to communicate with its Java component running inside a JVM
 
 # Server System Variables #
-tomcat_cookie_protect: true # Set-Cookie HttpOnly & Secure response header
+tomcat_cookie_protect: 'true' # Set-Cookie HttpOnly & Secure response header
+tomcat_ipv6: 'false' # Accept IPv6 socket connect If IPv6 is available on the operating system
+tomcat_jmxremote: 'true' # Enabling JMX Remote function
+tomcat_jvm_heapdumppath: '/tmp' # Heap dump folder
+tomcat_jvm_security_egd: '/dev/urandom' # Random number generation library
+tomcat_jvm_xss: '256k' # Thread stack size
 tomcat_lc_ctype: 'zh_CN.UTF-8' # The language of messages
 tomcat_path: '/data/tomcat' # Specify the Tomcat working directory
+tomcat_rmi_gcInterval: '28800' # RMI Forces periodic full collection interval in minutes
 tomcat_session_timeout: '10' # Tomcat Session Timeout
 tomcat_timezone: 'Asia/Shanghai' # Default timezone for a single instance of a running JVM
 tomcat_uid: '2001' # Tomcat userID
@@ -28,4 +33,4 @@ tomcat_ulimit_core: 'unlimited' # The number of core dump launched by systemd
 tomcat_ulimit_nofile: '10240' # The number of files launched by systemd
 tomcat_ulimit_nproc: '10240' # The number of processes launched by systemd
 tomcat_user: 'tomcat' # Tomcat running user
-tomcat_web_protect: true # Includeing Force SSL / Disable ETag / Allow-Methods / HSTS
+tomcat_web_protect: 'true' # Includeing Force SSL / Disable ETag / Allow-Methods / HSTS
