@@ -23,9 +23,9 @@
 - name: Install Apache Tomcat {{ tomcat_version }} Core
   unarchive:
     src: '{{ tomcat_soft_url }}{{ tomcat_version[0:1] }}/v{{ tomcat_version }}/bin/apache-tomcat-{{ tomcat_version }}.tar.gz'
-    dest: '{{ tomcat_arg._path }}'
-    owner: '{{ tomcat_arg._user }}'
-    group: '{{ tomcat_arg._user }}'
+    dest: '{{ tomcat_arg.path }}'
+    owner: '{{ tomcat_arg.user }}'
+    group: '{{ tomcat_arg.user }}'
     exclude: '{{ tomcat_exclusions }}'
     extra_opts: [--strip-components=1]
     remote_src: yes
