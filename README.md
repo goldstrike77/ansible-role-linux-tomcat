@@ -8,6 +8,9 @@ Install and configure tomcat on linux operating system.
 Requirements
 ------------
 
+Operating systems
+  - CentOS 6 or higher
+
 Tested on apache tomcat 8.0 or 8.5.
 
 Role Variables
