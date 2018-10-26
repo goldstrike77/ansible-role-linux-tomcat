@@ -17,7 +17,7 @@ tomcat_port:
   wrapper: '31000-31999' # A socket to communicate with its Java component running inside a JVM
   wrapper_jvm: '32000-32999' # A socket to communicate with its Java component running inside a JVM
 
-# Server System Variables #
+# System Variables #
 tomcat_arg:
   cookie_protect: 'true' # Set-Cookie HttpOnly & Secure response header
   disable_ipv6: 'true' # Deny IPv6 socket connect If IPv6 is available on the operating system
@@ -46,3 +46,7 @@ tomcat_arg:
   wrapper_logfile_maxsize: '50m' # Controls the maximum size of rolled files
   wrapper_syslog_loglevel: 'NONE' # Log level to use for logging to the Event Log on syslog on UNIX systems
   wrapper_ulimit_loglevel: 'STATUS' # Controls at which log level resource limits will be logged
+
+# Custom Variables #
+tomcat_custom_arg:
+  Environment: 'Production'
