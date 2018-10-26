@@ -50,6 +50,6 @@ tomcat_arg:
   wrapper_ulimit_loglevel: 'STATUS' # Controls at which log level resource limits will be logged
 
 # Custom Variables #
-tomcat_custom_arg:
-  Environment: 'Production' # example only
-  Version: '1.0' # example only
+#tomcat_custom_arg: # example only
+#  Environment: 'Production'
+#  Version: '1.0'
