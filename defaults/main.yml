@@ -3,7 +3,7 @@
 #tomcat_version: '8.0.53'
 java_home: '/usr/lib/jvm/java'
 system_service: '/lib/systemd/system'
-syslog: true
+syslog: 'true'
 syslog_server: '1.1.1.1'
 syslog_port: '12209'
 
@@ -29,6 +29,8 @@ tomcat_arg:
   path: '/data/tomcat' # Specify the Tomcat working directory
   rmi_gcInterval: '28800' # RMI Forces periodic full collection interval in minutes
   session_timeout: '10' # Tomcat Session Timeout
+  sslciphersuite: '' # The SSL Ciphers
+  sslprotocol: 'TLSv1+TLSv1.1+TLSv1.2' # The SSL protocols
   timezone: 'Asia/Shanghai' # Default timezone for a single instance of a running JVM
   uid: '2001' # Tomcat userID
   ulimit_core: 'unlimited' # The number of core dump launched by systemd
@@ -49,4 +51,5 @@ tomcat_arg:
 
 # Custom Variables #
 tomcat_custom_arg:
-  Environment: 'Production'
+  Environment: 'Production' # example only
+  Version: '1.0' # example only

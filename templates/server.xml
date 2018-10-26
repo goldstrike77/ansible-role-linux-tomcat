@@ -91,7 +91,10 @@
                URIEncoding="UTF-8" disableUploadTimeout="true" useBodyEncodingForURI="true"
                compression="on" compressionMinSize="2048" noCompressionUserAgents="gozilla,traviata"
                compressableMimeType = "text/html,text/xml,text/css,application/javascript,text/plain"
-               SSLProtocol="TLSv1+TLSv1.1+TLSv1.2" scheme="https" SSLEnabled="true" SSLVerifyClient="none"
+               SSLProtocol="{{ tomcat_arg.sslprotocol }}" scheme="https" SSLEnabled="true" SSLVerifyClient="none"
+{% if tomcat_arg.sslciphersuite != '' %}
+               SSLCipherSuite = "{{ tomcat_arg.sslciphersuite }}"
+{% endif %}
                SSLCertificateFile="${catalina.base}/conf/server.pem"
                SSLCertificateKeyFile="${catalina.base}/conf/server.pem"
                SSLCertificateChainFile="${catalina.base}/conf/server.pem"
