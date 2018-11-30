@@ -28,7 +28,9 @@
     group: '{{ tomcat_arg.user }}'
     exclude: '{{ tomcat_exclusions }}'
     extra_opts: [--strip-components=1]
-    remote_src: yes
+    remote_src: 'yes'
+    validate_certs: 'no'
+    timeout: '60'
   register: tomcat_update
 
 - name: Install Apache Tomcat {{ tomcat_version }} Extras
@@ -37,6 +39,8 @@
     dest: '{{ item.dest }}'
     owner: '{{ tomcat_arg.user }}'
     group: '{{ tomcat_arg.user }}'
+    validate_certs: 'no'
+    timeout: '60'
   with_items:
     - { src: 'catalina-jmx-remote.jar',  dest: '{{ tomcat_arg.path }}/lib/' }
     - { src: 'tomcat-juli-adapters.jar', dest: '{{ tomcat_arg.path }}/lib/', create: "{{ tomcat_version[0:3] == '8.0' }}" }
