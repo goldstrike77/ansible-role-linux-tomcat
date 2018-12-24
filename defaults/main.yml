@@ -11,7 +11,7 @@ syslog_port: '12209'
 tomcat_port:
   http_connectors: '8080' # HTTP connectors
   https_connectors: '8443' # HTTPs connectors
-  prometheus_javaagent: '9404' # Prometheus jmx_exporter port  
+  jmx_port: '9404' # Prometheus jmx_exporter port  
   rmi_port: '10201-10202' # The port to be used by the JMX/RMI registry for the Platform server
   server_port: '8005' # Tomcat Server port
   wrapper: '31000-31999' # A socket to communicate with its Java component running inside a JVM
