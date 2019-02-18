@@ -35,14 +35,14 @@ This role will work on the following operating systems:
 
 ### Apache Tomcat versions
 
-The following list of supported the tomcatDB releases:
+The following list of supported the tomcat releases:
 
 * Apache Tomcat 8.0, 8.5
 
 ## Role variables
 ### Minimal configuration
 
-In order to get the tomcatDB running, you'll have to define the following properties before executing the role:
+In order to get the tomcat running, you'll have to define the following properties before executing the role:
 
 * tomcat_version
 
