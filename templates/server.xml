@@ -22,7 +22,7 @@
 <Server port="{{ tomcat_port.server_port }}" shutdown="NONDETERMINISTICVALUE">
   <Listener className="org.apache.catalina.startup.VersionLoggerListener" />
   <!-- Security listener. Documentation at /docs/config/listeners.html -->
-  <Listener className="org.apache.catalina.security.SecurityListener" minimumUmask="0007" />
+  <Listener className="org.apache.catalina.security.SecurityListener" minimumUmask="{{ tomcat_arg.minimumUmask }}" />
   <!--APR library loader. Documentation at /docs/apr.html -->
   <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on" />
   <!-- Prevent memory leaks due to use of particular java/javax APIs-->
