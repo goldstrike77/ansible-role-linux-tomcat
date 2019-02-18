@@ -160,7 +160,7 @@ You can also use the group_vars or the host_vars files for setting the variables
       ulimit_nproc: '10240'
       user: 'tomcat'
       web_protect: 'true'
-      wrapper_console_format: 'PM' # Format to use for output to the console
+      wrapper_console_format: 'PM'
       wrapper_console_loglevel: 'INFO'
       wrapper_java_command_loglevel: 'NONE'
       wrapper_logfile: 'catalina.out'
