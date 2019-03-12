@@ -1,24 +1,26 @@
 ---
-- name: Include OS-specific variables
-  include_vars: '{{ ansible_os_family }}.yml'
+- name: Check current tomcat version
+  shell: "grep 'Apache Tomcat Version' {{ tomcat_arg.path }}/RELEASE-NOTES |awk '{print $4}'"
+  register: tomcat_current_version
+  changed_when: false
+  failed_when: false
 
-- name: Include tasks for specific OS
-  include: '{{ ansible_os_family }}.yml'
-
-- name: Configure the tomcat firewall
-  include: 'firewall.yml'
-
-- include: 'install.yml'
-
-- include: 'configureation.yml'
-
-- include: 'harden.yml'
-  when: tomcat_update|changed
-
-- name: Reload the tomcat service
-  shell: echo ''
-  notify: 'Ensure tomcat service is enabled'
-  when: tomcat_upgrade|changed or config_upgrade|changed or pki_upgrade|changed
-
-- name: Force the handler to run immediately
-  meta: flush_handlers
+- name: Tomcat operation
+  block:
+    - name: Include OS-specific variables
+      include_vars: '{{ ansible_os_family }}.yml'
+    - name: Include tasks for specific OS
+      include: '{{ ansible_os_family }}.yml'
+    - include: 'firewall.yml'
+    - include: 'install.yml'
+    - include: 'configureation.yml'
+    - include: 'harden.yml'
+      when: tomcat_update|changed
+    - name: Reload the tomcat service
+      shell: echo ''
+      notify: 'Ensure tomcat service is enabled'
+      when: tomcat_update|changed or tomcat_upgrade|changed or config_upgrade|changed or pki_upgrade|changed
+    - name: Force the handler to run immediately
+      meta: flush_handlers
+  when:
+    - tomcat_current_version.rc == 2 or tomcat_version not in tomcat_current_version.stdout
