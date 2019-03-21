@@ -30,7 +30,6 @@
     extra_opts: [--strip-components=1]
     remote_src: 'yes'
     validate_certs: 'no'
-    timeout: '60'
   register: tomcat_update
 
 - name: Install Apache Tomcat {{ tomcat_version }} Extras
