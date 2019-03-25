@@ -52,12 +52,16 @@ The `tomcat_version` should contain the apache tomcat releases version.
 There are some variables in defaults/main.yml which can (Or needs to) be overridden:
 
 #### General parameters
-* `tomcat_version`: Contain the apache tomcat releases version.
 * `java_home`: Environment variable to point to an installed JDK.
 * `system_service`: Path for system service file.
 * `syslog`:  A boolean value,  Enable or Disable console and access log to remote syslog server.
 * `syslog_server`: IP address of syslog server.
 * `syslog_port`: Port of syslog server.
+* `environments`: Define the object environment.
+* `consul_is_register`: a boolean value, whether register a client service with consul.
+* `consul_clients`: Consul client addresses list.
+* `consul_http_port`: Consul client listen port.
+* `consul_exporter_token`: Consul client ACL token.
 
 #### Listen port
 * `tomcat_port.http_connectors`: The TCP port number of HTTP connectors.
