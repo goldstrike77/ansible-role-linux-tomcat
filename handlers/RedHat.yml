@@ -1,6 +1,4 @@
 ---
-
-
 - name: Enable tomcat service
   service:
     name: 'tomcat'

@@ -54,11 +54,14 @@ The `tomcat_version` should contain the apache tomcat releases version.
 There are some variables in defaults/main.yml which can (Or needs to) be overridden:
 
 #### General parameters
+* `tomcat_selinux`: SELinux mongod policy.
 * `java_home`: Environment variable to point to an installed JDK.
 * `system_service`: Path for system service file.
 * `syslog`:  A boolean value,  Enable or Disable console and access log to remote syslog server.
 * `syslog_server`: IP address of syslog server.
 * `syslog_port`: Port of syslog server.
+
+##### Service Mesh
 * `environments`: Define the object environment.
 * `consul_is_register`: a boolean value, whether register a client service with consul.
 * `consul_clients`: Consul client addresses list.
@@ -132,9 +135,10 @@ Including an example of how to use your role (for instance, with variables passe
 ### Combination of group vars and playbook
 You can also use the group_vars or the host_vars files for setting the variables needed for this role. File you should change: group_vars/all or host_vars/`group_name`
 
+    tomcat_selinux: false
     java_home: '/usr/lib/jvm/java'
     system_service: '/lib/systemd/system'
-    syslog: 'true'
+    syslog: true
     syslog_server: '1.1.1.1'
     syslog_port: '12209'
     tomcat_port:
@@ -146,9 +150,9 @@ You can also use the group_vars or the host_vars files for setting the variables
       wrapper: '31000-31999'
       wrapper_jvm: '32000-32999'
     tomcat_arg:
-      cookie_protect: 'true'
-      disable_ipv6: 'true'
-      jmxremote: 'true'
+      cookie_protect: true
+      disable_ipv6: true
+      jmxremote: true
       jvm_heapdumppath: '/tmp'
       jvm_security_egd: '/dev/urandom'
       jvm_xss: '256k'
@@ -165,7 +169,7 @@ You can also use the group_vars or the host_vars files for setting the variables
       ulimit_nofile: '10240'
       ulimit_nproc: '10240'
       user: 'tomcat'
-      web_protect: 'true'
+      web_protect: true
       wrapper_console_format: 'PM'
       wrapper_console_loglevel: 'INFO'
       wrapper_java_command_loglevel: 'NONE'
@@ -176,6 +180,11 @@ You can also use the group_vars or the host_vars files for setting the variables
       wrapper_logfile_maxsize: '50m'
       wrapper_syslog_loglevel: 'NONE'
       wrapper_ulimit_loglevel: 'STATUS'
+    environments: 'SIT'
+    consul_is_register: false
+    consul_exporter_token: '00000000-0000-0000-0000-000000000000'
+    consul_clients: 'localhost'
+    consul_http_port: '8500'
 
 ## License
 

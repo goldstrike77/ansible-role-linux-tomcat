@@ -1,18 +1,20 @@
 ---
 # General parameters #
 #tomcat_version: '8.0.53'
+tomcat_selinux: false # SELinux security policy.
 java_home: '/usr/lib/jvm/java'
 system_service: '/lib/systemd/system'
 syslog: 'true'
 syslog_server: '1.1.1.1'
 syslog_port: '12209'
+
+# Service Mesh #
 environments: 'SIT'
-consul_is_register: false
-consul_exporter_token: '00000000-0000-0000-0000-000000000000'
-consul_clients:
-  - '1.1.1.1'
-  - '1.1.1.2'
-consul_http_port: '8500'
+consul_is_register: false # Whether register a client service with consul.
+consul_exporter_token: '00000000-0000-0000-0000-000000000000' # Consul client ACL token.
+consul_clients: # List of consul clients.
+  - 'localhost'
+consul_http_port: '8500' # The consul HTTP API port.
 
 # Listen port #
 tomcat_port:
@@ -26,9 +28,9 @@ tomcat_port:
 
 # System Variables #
 tomcat_arg:
-  cookie_protect: 'true' # Set-Cookie HttpOnly & Secure response header
-  disable_ipv6: 'true' # Deny IPv6 socket connect If IPv6 is available on the operating system
-  jmxremote: 'true' # Enabling JMX Remote function
+  cookie_protect: true # Set-Cookie HttpOnly & Secure response header
+  disable_ipv6: true # Deny IPv6 socket connect If IPv6 is available on the operating system
+  jmxremote: true # Enabling JMX Remote function
   jvm_heapdumppath: '/tmp' # Heap dump folder
   jvm_security_egd: '/dev/urandom' # Random number generation library
   jvm_xss: '256k' # Thread stack size
@@ -45,7 +47,7 @@ tomcat_arg:
   ulimit_nofile: '10240' # The number of files launched by systemd
   ulimit_nproc: '10240' # The number of processes launched by systemd
   user: 'tomcat' # Tomcat running user
-  web_protect: 'true' # Includeing Force SSL / Disable ETag / Allow-Methods / HSTS
+  web_protect: true # Includeing Force SSL / Disable ETag / Allow-Methods / HSTS
   wrapper_console_format: 'PM' # Format to use for output to the console
   wrapper_console_loglevel: 'INFO' # Log level to use for console output
   wrapper_java_command_loglevel: 'NONE' # Log level to use for Java command
