@@ -148,7 +148,7 @@
         -->
 {% if syslog %}
         <Valve className="org.apache.catalina.valves.GelfAccessLogValve" host="{{ syslog_server }}" port="{{ syslog_port }}"
-               pattern="%a %m %U %s %b %p %D %{X-Forwarded-For}i&quot;" />
+               pattern="%a %m %U %s %B %p %D %{X-Forwarded-For}i&quot;" />
 {% endif %}
       </Host>
     </Engine>
