@@ -54,7 +54,7 @@ The `tomcat_version` should contain the apache tomcat releases version.
 There are some variables in defaults/main.yml which can (Or needs to) be overridden:
 
 #### General parameters
-* `tomcat_selinux`: SELinux mongod policy.
+* `tomcat_selinux`: SELinux policy.
 * `java_home`: Environment variable to point to an installed JDK.
 * `system_service`: Path for system service file.
 * `syslog`:  A boolean value,  Enable or Disable console and access log to remote syslog server.
