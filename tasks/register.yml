@@ -10,4 +10,8 @@
   environment:
     no_proxy: '{{ item }}'
   with_items: '{{ consul_clients }}'
+  register: register_status
+  until: register_status.status == 200
+  retries: 10
+  delay: 3
   no_log: true
