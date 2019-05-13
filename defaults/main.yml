@@ -5,7 +5,7 @@ tomcat_version: '8.5.40'
 tomcat_selinux: false # SELinux security policy.
 java_home: '/usr/lib/jvm/java'
 system_service: '/lib/systemd/system'
-tomcat_syslog: 'false'
+tomcat_syslog: false
 tomcat_syslog_server: '1.1.1.1'
 tomcat_syslog_port: '12201'
 
