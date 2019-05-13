@@ -31,6 +31,9 @@
     remote_src: 'yes'
     validate_certs: 'no'
   register: tomcat_update
+  until: tomcat_update is succeeded
+  retries: 3
+  delay: 5
 
 - name: Install Apache Tomcat {{ tomcat_version }} Extras
   get_url:
@@ -46,6 +49,9 @@
     - { src: 'tomcat-juli.jar',          dest: '{{ tomcat_arg.path }}/bin/', create: "{{ tomcat_version[0:3] == '8.0' }}" }
   when: item.create | default(true) | bool
   register: tomcat_upgrade
+  until: tomcat_upgrade is succeeded
+  retries: 3
+  delay: 5
 
 - name: Install support binary package
   copy:
