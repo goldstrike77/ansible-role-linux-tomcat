@@ -17,11 +17,11 @@
     - include: 'install.yml'
     - include: 'configureation.yml'
     - include: 'harden.yml'
-      when: tomcat_update|changed
+      when: tomcat_update is changed
     - name: Reload the tomcat service
       shell: echo ''
       notify: 'Ensure tomcat service is enabled'
-      when: tomcat_update|changed or tomcat_upgrade|changed or config_upgrade|changed or pki_upgrade|changed
+      when: tomcat_update is changed or tomcat_upgrade is changed or config_upgrade is changed or pki_upgrade is changed
     - name: Force the handler to run immediately
       meta: flush_handlers
     - include_tasks: 'register.yml'
