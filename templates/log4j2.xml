@@ -4,8 +4,8 @@
         <Console name="STDOUT" target="SYSTEM_OUT">
             <PatternLayout pattern="%-5p - %m%n"/>
         </Console>
-{% if syslog %}
-        <Gelf name="gelf" host="udp:{{ syslog_server }}" port="{{ syslog_port }}" version="1.1" extractStackTrace="true"
+{% if tomcat_syslog %}
+        <Gelf name="gelf" host="udp:{{ tomcat_syslog_server }}" port="{{ tomcat_syslog_port }}" version="1.1" extractStackTrace="true"
               filterStackTrace="true" mdcProfiling="true" includeFullMdc="true" maximumMessageSize="8192" 
               originHost="%host{fqdn}" additionalFieldTypes="fieldName1=String,fieldName2=Double,fieldName3=Long"
               ignoreExceptions="true">
@@ -20,7 +20,7 @@
     <Loggers>
         <Root level="INFO" includeLocation="false">
             <AppenderRef ref="STDOUT"/>
-{% if syslog %}
+{% if tomcat_syslog %}
             <AppenderRef ref="gelf" />
 {% endif %}
         </Root>

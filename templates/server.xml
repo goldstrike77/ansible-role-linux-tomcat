@@ -146,8 +146,8 @@
                prefix="localhost_access_log" suffix=".txt"
                pattern="%h %l %u %t &quot;%r&quot; %s %b" />
         -->
-{% if syslog %}
-        <Valve className="org.apache.catalina.valves.GelfAccessLogValve" host="{{ syslog_server }}" port="{{ syslog_port }}"
+{% if tomcat_syslog %}
+        <Valve className="org.apache.catalina.valves.GelfAccessLogValve" host="{{ tomcat_syslog_server }}" port="{{ tomcat_syslog_port }}"
                pattern="%a %m %U %s %B %p %D %{X-Forwarded-For}i&quot;" />
 {% endif %}
       </Host>

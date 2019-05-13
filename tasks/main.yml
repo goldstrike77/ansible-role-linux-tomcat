@@ -25,6 +25,6 @@
     - name: Force the handler to run immediately
       meta: flush_handlers
     - include_tasks: 'register.yml'
-      when: consul_is_register
+      when: consul_public_register
   when:
     - tomcat_current_version.rc == 2 or tomcat_version not in tomcat_current_version.stdout
