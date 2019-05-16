@@ -1,24 +1,41 @@
 ---
 - name: Allow tomcat service port
   firewalld:
-    port: '{{ item.value }}/tcp'
+    port: '{{ item }}/tcp'
+    zone: 'public'
     permanent: 'true'
+    immediate: 'true'
     state: 'enabled'
-  with_dict: '{{ tomcat_port }}'
+  loop:
+  - '{{ tomcat_port_http }}'
+  - '{{ tomcat_port_https }}'
+  - '{{ tomcat_port_jmx }}'
+  - '{{ tomcat_port_rmi }}'
+  - '{{ tomcat_port_server }}'
+  - '{{ tomcat_port_wrapper }}'
+  - '{{ tomcat_port_wrapper_jvm }}'
   register: firewalld_update
   when: ansible_distribution_major_version|int > 6
 
 - name: Allow tomcat service port
   lineinfile:
     dest: '/etc/sysconfig/iptables'
-    regexp: '^-A INPUT -p tcp -m tcp --dport {{ item.value | regex_replace("-", ":") }} -j ACCEPT$'
-    line: '-A INPUT -p tcp -m tcp --dport {{ item.value | regex_replace("-", ":") }} -j ACCEPT'
+    regexp: '^-A INPUT -p tcp -m tcp --dport {{ item | regex_replace("-", ":") }} -j ACCEPT$'
+    line: '-A INPUT -p tcp -m tcp --dport {{ item | regex_replace("-", ":") }} -j ACCEPT'
     insertafter: '^:OUTPUT ACCEPT \[\d*:\d*\]$'
-  with_dict: '{{ tomcat_port }}'
+  loop:
+  - '{{ tomcat_port_http }}'
+  - '{{ tomcat_port_https }}'
+  - '{{ tomcat_port_jmx }}'
+  - '{{ tomcat_port_rmi }}'
+  - '{{ tomcat_port_server }}'
+  - '{{ tomcat_port_wrapper }}'
+  - '{{ tomcat_port_wrapper_jvm }}'
   register: firewalld_update
   when: ansible_distribution_major_version|int < 7
 
 - name: Reload the firewalld
   service:
-    name: '{% if ansible_distribution_major_version|int < 7 %}iptables{% else %}firewalld{% endif %}'
-    state: reloaded
+    name: 'iptables'
+    state: 'reloaded'
+  when: ansible_distribution_major_version|int < 7

@@ -19,7 +19,7 @@
      define subcomponents such as "Valves" at this level.
      Documentation at /docs/config/server.html
  -->
-<Server port="{{ tomcat_port.server_port }}" shutdown="NONDETERMINISTICVALUE">
+<Server port="{{ tomcat_port_server }}" shutdown="NONDETERMINISTICVALUE">
   <Listener className="org.apache.catalina.startup.VersionLoggerListener" />
   <!-- Security listener. Documentation at /docs/config/listeners.html -->
   <Listener className="org.apache.catalina.security.SecurityListener" minimumUmask="{{ tomcat_arg.minimumUmask }}" />
@@ -30,7 +30,7 @@
   <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener" />
   <Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener" />
   <Listener className="org.apache.catalina.mbeans.JmxRemoteLifecycleListener"
-            rmiRegistryPortPlatform="{{ tomcat_port.rmi_port.split('-')[0] }}" rmiServerPortPlatform="{{ tomcat_port.rmi_port.split('-')[1] }}" />
+            rmiRegistryPortPlatform="{{ tomcat_port_rmi.split('-')[0] }}" rmiServerPortPlatform="{{ tomcat_port_rmi.split('-')[1] }}" />
 
   <!-- Global JNDI resources
        Documentation at /docs/jndi-resources-howto.html
@@ -66,8 +66,8 @@
          APR (HTTP/AJP) Connector: /docs/apr.html
          Define a non-SSL/TLS HTTP/1.1 Connector on port 8080
     -->
-    <Connector port="{{ tomcat_port.http_connectors }}" protocol="org.apache.coyote.http11.Http11AprProtocol" xpoweredBy="false"
-               maxThreads="{{ (ansible_memtotal_mb / 30)|int }}" enableLookups="false" redirectPort="{{ tomcat_port.https_connectors }}"
+    <Connector port="{{ tomcat_port_http }}" protocol="org.apache.coyote.http11.Http11AprProtocol" xpoweredBy="false"
+               maxThreads="{{ (ansible_memtotal_mb / 30)|int }}" enableLookups="false" redirectPort="{{ tomcat_port_https }}"
                acceptCount="50" connectionTimeout="20000" useBodyEncodingForURI="true" allowTrace="false" 
                URIEncoding="UTF-8" disableUploadTimeout="true" server="secure-{{ 59 |random(seed=inventory_hostname) }}{{ inventory_hostname|upper|b64encode|b64encode|replace('==', '') }}"
                compression="on" compressionMinSize="2048" noCompressionUserAgents="gozilla,traviata"
@@ -84,7 +84,7 @@
          style configuration. When using the APR/native implementation, the
          OpenSSL style configuration is required as described in the APR/native
          documentation -->
-    <Connector maxThreads="{{ (ansible_memtotal_mb / 30)|int }}" port="{{ tomcat_port.https_connectors }}" protocol="org.apache.coyote.http11.Http11AprProtocol"
+    <Connector maxThreads="{{ (ansible_memtotal_mb / 30)|int }}" port="{{ tomcat_port_https }}" protocol="org.apache.coyote.http11.Http11AprProtocol"
                enableLookups="false" acceptCount="50" connectionTimeout="20000" xpoweredBy="false"
                server="secure-{{ 59 |random(seed=inventory_hostname) }}{{ inventory_hostname|upper|b64encode|b64encode|replace('==', '') }}" secure="true" allowTrace="false"
                URIEncoding="UTF-8" disableUploadTimeout="true" useBodyEncodingForURI="true"

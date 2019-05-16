@@ -12,7 +12,7 @@
         dest: '{{ tomcat_arg.path }}/lib/org/apache/catalina/util/ServerInfo.properties'
         regexp: '{{ item.regexp }}'
         line: '{{ item.line }}'
-      with_items:
+      loop:
         - { regexp: '^server.info',   line: 'server.info=' }
         - { regexp: '^server.number', line: 'server.number=' }
         - { regexp: '^server.built',  line: 'server.built=' }
@@ -22,7 +22,7 @@
       file:
         state: absent
         path: "{{ item }}"
-      with_items:
+      loop:
         - '{{ tomcat_arg.path }}/lib/org'
         - '{{ tomcat_arg.path }}/lib/META-INF'
 
@@ -32,5 +32,4 @@
     owner: '{{ tomcat_arg.user }}'
     group: '{{ tomcat_arg.user }}'
     mode: 'o-rwx'
-  with_items:
-    - '{{ restrict_path }}'
+  loop: '{{ restrict_path }}'

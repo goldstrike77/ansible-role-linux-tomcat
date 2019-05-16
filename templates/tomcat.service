@@ -13,6 +13,8 @@ LimitCORE=infinity
 LimitMEMLOCK=infinity
 KillMode=control-group
 Environment=SYSTEMD_KILLMODE_WARNING=true
+Restart=on-failure
+RestartSec=30s
 
 [Install]
 WantedBy=multi-user.target

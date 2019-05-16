@@ -17,8 +17,7 @@
     dest: '{{ tomcat_arg.path }}/.bash_profile'
     state: present
     line: '{{ item }}'
-  with_items:
-    - '{{ tomcat_environment }}'
+  loop: '{{ tomcat_environment }}'
 
 - name: Install Apache Tomcat {{ tomcat_version }} Core
   unarchive:
@@ -43,7 +42,7 @@
     group: '{{ tomcat_arg.user }}'
     validate_certs: 'no'
     timeout: '60'
-  with_items:
+  loop:
     - { src: 'catalina-jmx-remote.jar',  dest: '{{ tomcat_arg.path }}/lib/' }
     - { src: 'tomcat-juli-adapters.jar', dest: '{{ tomcat_arg.path }}/lib/', create: "{{ tomcat_version[0:3] == '8.0' }}" }
     - { src: 'tomcat-juli.jar',          dest: '{{ tomcat_arg.path }}/bin/', create: "{{ tomcat_version[0:3] == '8.0' }}" }
@@ -60,8 +59,7 @@
     owner: '{{ tomcat_arg.user }}'
     group: '{{ tomcat_arg.user }}'
     mode: 0750
-  with_items:
-    - '{{ support_binary }}'
+  loop: '{{ support_binary }}'
 
 - name: Install support JAR package
   copy:
@@ -70,5 +68,4 @@
     owner: '{{ tomcat_arg.user }}'
     group: '{{ tomcat_arg.user }}'
     mode: 0644
-  with_items:
-    - '{{ support_jars }}'
+  loop: '{{ support_jars }}'

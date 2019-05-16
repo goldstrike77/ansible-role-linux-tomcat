@@ -2,6 +2,6 @@
 - name: Install the dependent packages
   yum:
     name: '{{ ",".join(vars["dependent_packages"]) }}'
-    state: present
+    state: 'present'
     validate_certs: 'no'
     disable_gpg_check: 'yes'

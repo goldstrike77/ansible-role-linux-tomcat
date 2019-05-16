@@ -52,6 +52,16 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `syslog`:  A boolean value,  Enable or Disable console and access log to remote syslog server.
 * `syslog_server`: IP address of syslog server.
 * `syslog_port`: Port of syslog server.
+* `tomcat_jmxremote`: Enabling JMX Remote function.
+* `tomcat_web_protect`: Includeing Force SSL / Disable ETag / Allow-Methods / HSTS.
+* `tomcat_cookie_protect`: Set-Cookie HttpOnly & Secure response header.
+* `tomcat_disable_ipv6`: Deny IPv6 socket connect If IPv6 is available on the operating system
+
+#### JVM memory Variables
+* `tomcat_jvm_metaspace`: Size of the metaspace in MB.
+* `tomcat_jvm_xmn`: Size of the heap for the young generation in MB.
+* `tomcat_jvm_xmx`: Size of the heap in MB.
+* `tomcat_jvm_xss`: Size of thread stack.
 
 ##### Service Mesh
 * `environments`: Define the service environment.
@@ -61,21 +71,17 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `consul_public_http_port`: The consul HTTP API port.
 
 #### Listen port
-* `tomcat_port.http_connectors`: The TCP port number of HTTP connectors.
-* `tomcat_port.https_connectors`: The TCP port number on HTTPs connectors.
-* `tomcat_port.jmx_port`: Prometheus jmx_exporter port .
-* `tomcat_port.rmi_port`: The port to be used by the JMX/RMI registry for the Platform server.
-* `tomcat_port.server_port`: Tomcat Server port.
-* `tomcat_port.wrapper`: A socket to communicate with its Java component running inside a JVM.
-* `tomcat_port.wrapper_jvm`: A socket to communicate with its Java component running inside a JVM.
+* `tomcat_port_http`: The TCP port number of HTTP connectors.
+* `tomcat_port_https`: The TCP port number on HTTPs connectors.
+* `tomcat_port_jmx`: Prometheus jmx_exporter port .
+* `tomcat_port_rmi`: The port to be used by the JMX/RMI registry for the Platform server.
+* `tomcat_port_server`: Tomcat Server port.
+* `tomcat_port_wrapper`: A socket to communicate with its Java component running inside a JVM.
+* `tomcat_port_wrapper_jvm`: A socket to communicate with its Java component running inside a JVM.
 
 #### System Variables
-* `tomcat_arg.cookie_protect`: Set-Cookie HttpOnly & Secure response header.
-* `tomcat_arg.disable_ipv6`: Deny IPv6 socket connect If IPv6 is available on the operating system.
-* `tomcat_arg.jmxremote`: Enabling JMX Remote function.
 * `tomcat_arg.jvm_heapdumppath`: Heap dump folder.
 * `tomcat_arg.jvm_security_egd`: Random number generation library.
-* `tomcat_arg.jvm_xss`:Thread stack size.
 * `tomcat_arg.lc_ctype`: The language of messages.
 * `tomcat_arg.minimumUmask`:The least restrictive umask for Security Lifecycle Listener.
 * `tomcat_arg.path`: Specify the Tomcat working directory.
@@ -89,7 +95,6 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `tomcat_arg.ulimit_nofile`: The number of files launched by systemd.
 * `tomcat_arg.ulimit_nproc`: The number of processes launched by systemd.
 * `tomcat_arg.user`: System user name for running tomcat services.
-* `tomcat_arg.web_protect`: Includeing Force SSL / Disable ETag / Allow-Methods / HSTS.
 * `tomcat_arg.wrapper_console_format`: Format to use for output to the console.
 * `tomcat_arg.wrapper_console_loglevel`: Log level to use for console output.
 * `tomcat_arg.wrapper_java_command_loglevel`: Log level to use for Java command.
@@ -130,24 +135,27 @@ You can also use the group_vars or the host_vars files for setting the variables
     tomcat_selinux: false
     java_home: '/usr/lib/jvm/java'
     system_service: '/lib/systemd/system'
-    syslog: true
-    syslog_server: '1.1.1.1'
-    syslog_port: '12209'
-    tomcat_port:
-      http_connectors: '8080'
-      https_connectors: '8443'
-      jmx_port: '9404'
-      rmi_port: '10201-10202'
-      server_port: '8005'
-      wrapper: '31000-31999'
-      wrapper_jvm: '32000-32999'
+    tomcat_syslog: false
+    tomcat_syslog_server: '1.1.1.1'
+    tomcat_syslog_port: '12201'
+    tomcat_jmxremote: true
+    tomcat_web_protect: true
+    tomcat_cookie_protect: true
+    tomcat_disable_ipv6: true
+    tomcat_port_http: '8080'
+    tomcat_port_https: '8443'
+    tomcat_port_jmx: '9404'
+    tomcat_port_rmi: '10201-10202'
+    tomcat_port_server: '8005'
+    tomcat_port_wrapper: '31000-31999'
+    tomcat_port_wrapper_jvm: '32000-32999'
+    tomcat_jvm_metaspace`: '256'
+    tomcat_jvm_xmn`: '128'
+    tomcat_jvm_xmx`: '1024'
+    tomcat_jvm_xss`: '256'
     tomcat_arg:
-      cookie_protect: true
-      disable_ipv6: true
-      jmxremote: true
       jvm_heapdumppath: '/tmp'
       jvm_security_egd: '/dev/urandom'
-      jvm_xss: '256k'
       lc_ctype: 'zh_CN.UTF-8'
       minimumUmask: '0007'
       path: '/data/tomcat'
@@ -161,7 +169,6 @@ You can also use the group_vars or the host_vars files for setting the variables
       ulimit_nofile: '10240'
       ulimit_nproc: '10240'
       user: 'tomcat'
-      web_protect: true
       wrapper_console_format: 'PM'
       wrapper_console_loglevel: 'INFO'
       wrapper_java_command_loglevel: 'NONE'

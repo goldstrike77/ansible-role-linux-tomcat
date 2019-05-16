@@ -1,28 +1,33 @@
 ---
-- name: 'Get getenforce binary'
+- name: Get getenforce binary
   stat:
     path: '/usr/sbin/getenforce'
   register: getenforce_bin
   become: yes
 
-- name: 'Collect getenforce output'
+- name: Collect getenforce output
   command: getenforce
   register: sestatus
   when: 'getenforce_bin.stat.exists'
   changed_when: false
   become: yes
 
-- name: 'Set tomcat_selinux to true if getenforce returns Enforcing or Permissive'
+- name: Set tomcat_selinux to true if getenforce returns Enforcing or Permissive
   set_fact:
     tomcat_selinux: '{{ true }}'
   when: 'getenforce_bin.stat.exists and ("Enforcing" in sestatus.stdout or "Permissive" in sestatus.stdout)'
 
-#- name: 'Allow Tomcat to listen on tcp port'
-#  seport:
-#    ports: '{{ item.value }}'
-#    proto: 'tcp'
-#    setype: 'http_port_t'
-#    state: 'present'
-#  loop: '{{ tomcat_port|dict2items }}'
-#  when:
-#    - tomcat_selinux
+- name: Allow Tomcat to listen on tcp port
+  seport:
+    ports: '{{ item }}'
+    proto: 'tcp'
+    setype: 'http_port_t'
+    state: 'present'
+    loop:
+      - '{{ tomcat_port_http }}'
+      - '{{ tomcat_port_https }}'
+      - '{{ tomcat_port_jmx }}'
+      - '{{ tomcat_port_rmi }}'
+      - '{{ tomcat_port_server }}'
+      - '{{ tomcat_port_wrapper }}'
+      - '{{ tomcat_port_wrapper_jvm }}'

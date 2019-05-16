@@ -594,7 +594,7 @@
 
     <session-config>
         <session-timeout>{{ tomcat_arg.session_timeout }}</session-timeout>
-{% if tomcat_arg.cookie_protect %}
+{% if tomcat_cookie_protect %}
         <cookie-config>
             <http-only>true</http-only>
             <secure>true</secure>
@@ -4702,7 +4702,7 @@
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 
-{% if tomcat_arg.web_protect %}
+{% if tomcat_web_protect %}
 <!-- ===== Force SSL for all applications ===== -->
   <security-constraint>
       <web-resource-collection>

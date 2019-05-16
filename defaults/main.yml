@@ -8,6 +8,16 @@ system_service: '/lib/systemd/system'
 tomcat_syslog: false
 tomcat_syslog_server: '1.1.1.1'
 tomcat_syslog_port: '12201'
+tomcat_jmxremote: true # Enabling JMX Remote function.
+tomcat_web_protect: true # Includeing Force SSL / Disable ETag / Allow-Methods / HSTS.
+tomcat_cookie_protect: true # Set-Cookie HttpOnly & Secure response header.
+tomcat_disable_ipv6: true # Deny IPv6 socket connect If IPv6 is available on the operating system
+
+# JVM memory Variables #
+tomcat_jvm_metaspace: '{% if ansible_memtotal_mb > 4096 and ansible_memtotal_mb <= 8192 %}512{% elif ansible_memtotal_mb > 8192 %}1024{% else %}256{% endif %}' # Size of the metaspace in MB.
+tomcat_jvm_xmn: '{{ ((ansible_memtotal_mb - 2048 ) * 0.6 * 0.2)|int }}' # Size of the heap for the young generation in MB.
+tomcat_jvm_xmx: '{{ ((ansible_memtotal_mb - 2048 ) * 0.6)|int }}' # Size of the heap in MB.
+tomcat_jvm_xss: '256' # Size of thread stack in KB.
 
 # Service Mesh #
 environments: 'SIT' # Define the service environment.
@@ -17,23 +27,18 @@ consul_public_clients: 'localhost' # List of public consul clients.
 consul_public_http_port: '8500' # The consul HTTP API port.
 
 # Listen port #
-tomcat_port:
-  http_connectors: '8080' # HTTP connectors
-  https_connectors: '8443' # HTTPs connectors
-  jmx_port: '9404' # Prometheus jmx_exporter port  
-  rmi_port: '10201-10202' # The port to be used by the JMX/RMI registry for the Platform server
-  server_port: '8005' # Tomcat Server port
-  wrapper: '31000-31999' # A socket to communicate with its Java component running inside a JVM
-  wrapper_jvm: '32000-32999' # A socket to communicate with its Java component running inside a JVM
+tomcat_port_http: '8080' # HTTP connectors
+tomcat_port_https: '8443' # HTTPs connectors
+tomcat_port_jmx: '9404' # Prometheus jmx_exporter port  
+tomcat_port_rmi: '10201-10202' # The port to be used by the JMX/RMI registry for the Platform server
+tomcat_port_server: '8005' # Tomcat Server port
+tomcat_port_wrapper: '31000-31999' # A socket to communicate with its Java component running inside a JVM
+tomcat_port_wrapper_jvm: '32000-32999' # A socket to communicate with its Java component running inside a JVM
 
 # System Variables #
 tomcat_arg:
-  cookie_protect: true # Set-Cookie HttpOnly & Secure response header
-  disable_ipv6: true # Deny IPv6 socket connect If IPv6 is available on the operating system
-  jmxremote: true # Enabling JMX Remote function
   jvm_heapdumppath: '/tmp' # Heap dump folder
   jvm_security_egd: '/dev/urandom' # Random number generation library
-  jvm_xss: '256k' # Thread stack size
   lc_ctype: 'zh_CN.UTF-8' # The language of messages
   minimumUmask: '0007' # The least restrictive umask for Security Lifecycle Listener
   path: '/data/tomcat' # Specify the Tomcat working directory
@@ -47,7 +52,6 @@ tomcat_arg:
   ulimit_nofile: '10240' # The number of files launched by systemd
   ulimit_nproc: '10240' # The number of processes launched by systemd
   user: 'tomcat' # Tomcat running user
-  web_protect: true # Includeing Force SSL / Disable ETag / Allow-Methods / HSTS
   wrapper_console_format: 'PM' # Format to use for output to the console
   wrapper_console_loglevel: 'INFO' # Log level to use for console output
   wrapper_java_command_loglevel: 'NONE' # Log level to use for Java command

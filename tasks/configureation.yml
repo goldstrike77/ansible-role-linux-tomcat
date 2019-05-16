@@ -6,8 +6,7 @@
     owner: '{{ tomcat_arg.user }}'
     group: '{{ tomcat_arg.user }}'
     mode: 0600
-  with_items:
-    - '{{ tomcat_conf }}'
+  loop: '{{ tomcat_conf }}'
   register: config_upgrade
 
 - name: Tomcat server certificate file transfer
@@ -17,8 +16,7 @@
     owner: '{{ tomcat_arg.user }}'
     group: '{{ tomcat_arg.user }}'
     mode: 0600
-  with_items:
-    - '{{ server_certificate }}'
+  loop: '{{ server_certificate }}'
   tags:
     - 'server_certificate_file'
   register: pki_upgrade
