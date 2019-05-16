@@ -29,8 +29,10 @@
   <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener" />
   <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener" />
   <Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener" />
+{% if tomcat_jmxremote %}
   <Listener className="org.apache.catalina.mbeans.JmxRemoteLifecycleListener"
             rmiRegistryPortPlatform="{{ tomcat_port_rmi.split('-')[0] }}" rmiServerPortPlatform="{{ tomcat_port_rmi.split('-')[1] }}" />
+{% endif %}
 
   <!-- Global JNDI resources
        Documentation at /docs/jndi-resources-howto.html

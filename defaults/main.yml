@@ -8,10 +8,10 @@ system_service: '/lib/systemd/system'
 tomcat_syslog: false
 tomcat_syslog_server: '1.1.1.1'
 tomcat_syslog_port: '12201'
-tomcat_jmxremote: true # Enabling JMX Remote function.
-tomcat_web_protect: true # Includeing Force SSL / Disable ETag / Allow-Methods / HSTS.
-tomcat_cookie_protect: true # Set-Cookie HttpOnly & Secure response header.
-tomcat_disable_ipv6: true # Deny IPv6 socket connect If IPv6 is available on the operating system
+tomcat_jmxremote: false # Enabling JMX Remote function.
+tomcat_web_protect: false # Includeing Force SSL / Disable ETag / Allow-Methods / HSTS.
+tomcat_cookie_protect: false # Set-Cookie HttpOnly & Secure response header.
+tomcat_disable_ipv6: false # Deny IPv6 socket connect If IPv6 is available on the operating system
 
 # JVM memory Variables #
 tomcat_jvm_metaspace: '{% if ansible_memtotal_mb > 4096 and ansible_memtotal_mb <= 8192 %}512{% elif ansible_memtotal_mb > 8192 %}1024{% else %}256{% endif %}' # Size of the metaspace in MB.

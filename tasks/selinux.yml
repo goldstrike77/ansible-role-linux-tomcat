@@ -23,11 +23,12 @@
     proto: 'tcp'
     setype: 'http_port_t'
     state: 'present'
-    loop:
-      - '{{ tomcat_port_http }}'
-      - '{{ tomcat_port_https }}'
-      - '{{ tomcat_port_jmx }}'
-      - '{{ tomcat_port_rmi }}'
-      - '{{ tomcat_port_server }}'
-      - '{{ tomcat_port_wrapper }}'
-      - '{{ tomcat_port_wrapper_jvm }}'
+  loop:
+    - '{{ tomcat_port_http }}'
+    - '{{ tomcat_port_https }}'
+    - '{{ tomcat_port_jmx }}'
+    - '{{ tomcat_port_rmi }}'
+    - '{{ tomcat_port_server }}'
+    - '{{ tomcat_port_wrapper }}'
+    - '{{ tomcat_port_wrapper_jvm }}'
+  when: tomcat_selinux
