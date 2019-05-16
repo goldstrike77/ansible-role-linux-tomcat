@@ -49,9 +49,9 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `tomcat_selinux`: SELinux policy.
 * `java_home`: Environment variable to point to an installed JDK.
 * `system_service`: Path for system service file.
-* `syslog`:  A boolean value,  Enable or Disable console and access log to remote syslog server.
-* `syslog_server`: IP address of syslog server.
-* `syslog_port`: Port of syslog server.
+* `tomcat_syslog`:  A boolean value,  Enable or Disable console and access log to remote syslog server.
+* `tomcat_syslog_server`: IP address of syslog server.
+* `tomcat_syslog_port`: Port of syslog server.
 * `tomcat_jmxremote`: Enabling JMX Remote function.
 * `tomcat_web_protect`: Includeing Force SSL / Disable ETag / Allow-Methods / HSTS.
 * `tomcat_cookie_protect`: Set-Cookie HttpOnly & Secure response header.
