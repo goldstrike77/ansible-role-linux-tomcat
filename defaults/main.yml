@@ -19,7 +19,6 @@ tomcat_jvm_xmn: '{{ ((ansible_memtotal_mb - 2048 ) * 0.6 * 0.2)|int }}' # Size o
 tomcat_jvm_xmx: '{{ ((ansible_memtotal_mb - 2048 ) * 0.6)|int }}' # Size of the heap in MB.
 tomcat_jvm_xss: '256' # Size of thread stack in KB.
 
-
 # Service Mesh #
 environments: 'SIT' # Define the service environment.
 consul_public_register: false # Whether register a exporter service with public consul client.
