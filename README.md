@@ -47,8 +47,7 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 #### General parameters
 * `tomcat_version` should contain the Apache Tomcat releases version.
 * `tomcat_selinux`: SELinux policy.
-* `java_home`: Environment variable to point to an installed JDK.
-* `system_service`: Path for system service file.
+* `tomcat_java_home`: Environment variable to point to an installed JDK.
 * `tomcat_path`: Specify the Tomcat working directory.
 * `tomcat_syslog`:  A boolean value,  Enable or Disable console and access log to remote syslog server.
 * `tomcat_syslog_server`: IP address of syslog server.
@@ -133,8 +132,7 @@ Including an example of how to use your role (for instance, with variables passe
 You can also use the group_vars or the host_vars files for setting the variables needed for this role. File you should change: group_vars/all or host_vars/`group_name`
 
     tomcat_selinux: false
-    java_home: '/usr/lib/jvm/java'
-    system_service: '/lib/systemd/system'
+    tomcat_java_home: '/usr/lib/jvm/java'
     tomcat_path: '/data'
     tomcat_syslog: false
     tomcat_syslog_server: '1.1.1.1'

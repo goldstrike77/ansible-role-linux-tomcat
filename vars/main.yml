@@ -45,10 +45,10 @@ server_certificate:
   - 'server.pem'
 
 tomcat_environment:
-  - 'export JAVA_HOME={{ java_home }}'
-  - 'export PATH=$PATH:{{ java_home }}/bin'
+  - 'export JAVA_HOME={{ tomcat_java_home }}'
+  - 'export PATH=$PATH:{{ tomcat_java_home }}/bin'
   - 'export CATALINA_HOME={{ tomcat_path }}/tomcat'
-  - 'export CLASSPATH={{ java_home }}/jre/lib:{{ java_home }}/lib:{{ java_home }}/lib/tools.jar'
+  - 'export CLASSPATH={{ tomcat_java_home }}/jre/lib:{{ tomcat_java_home }}/lib:{{ tomcat_java_home }}/lib/tools.jar'
   - 'export CLASSPATH=$CLASSPATH:{{ tomcat_path }}/tomcat/lib:.'
   - 'export LC_CTYPE="{{ tomcat_arg.lc_ctype }}"'
 

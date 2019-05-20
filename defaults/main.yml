@@ -3,8 +3,7 @@
 tomcat_is_install: false # A boolean value, whether install the Apache Tomcat.
 tomcat_version: '8.5.40'
 tomcat_selinux: false # SELinux security policy.
-java_home: '/usr/lib/jvm/java'
-system_service: '/lib/systemd/system'
+tomcat_java_home: '/usr/lib/jvm/java'
 tomcat_path: '/data' # Specify the Tomcat working directory
 tomcat_syslog: false
 tomcat_syslog_server: '1.1.1.1'
