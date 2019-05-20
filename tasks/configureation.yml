@@ -2,7 +2,7 @@
 - name: Tomcat configuration file transfer
   template:
     src: '{{ item }}'
-    dest: '{{ tomcat_arg.path }}/conf/'
+    dest: '{{ tomcat_path }}/tomcat/conf/'
     owner: '{{ tomcat_arg.user }}'
     group: '{{ tomcat_arg.user }}'
     mode: 0600
@@ -12,7 +12,7 @@
 - name: Tomcat server certificate file transfer
   copy:
     src: '{{ item }}'
-    dest: '{{ tomcat_arg.path }}/conf/'
+    dest: '{{ tomcat_path }}/tomcat/conf/'
     owner: '{{ tomcat_arg.user }}'
     group: '{{ tomcat_arg.user }}'
     mode: 0600
@@ -34,7 +34,7 @@
 
 - name: Tomcat service scripts symlink
   file:
-    src: '{{ tomcat_arg.path }}/bin/tomcat.init'
+    src: '{{ tomcat_path }}/tomcat/bin/tomcat.init'
     path: /etc/init.d/tomcat
     state: link
   when:
@@ -44,7 +44,7 @@
 - name: Test page transfer
   copy:
     src: 'index.html'
-    dest: '{{ tomcat_arg.path }}/webapps/ROOT/'
+    dest: '{{ tomcat_path }}/tomcat/webapps/ROOT/'
     owner: '{{ tomcat_arg.user }}'
     group: '{{ tomcat_arg.user }}'
     mode: 0644

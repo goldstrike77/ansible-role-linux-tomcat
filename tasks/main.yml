@@ -1,6 +1,6 @@
 ---
 - name: Check current tomcat version
-  shell: "grep 'Apache Tomcat Version' {{ tomcat_arg.path }}/RELEASE-NOTES |awk '{print $4}'"
+  shell: "grep 'Apache Tomcat Version' {{ tomcat_path }}/tomcat/RELEASE-NOTES |awk '{print $4}'"
   register: tomcat_current_version
   changed_when: false
   failed_when: false

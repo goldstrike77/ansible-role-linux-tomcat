@@ -47,16 +47,16 @@ server_certificate:
 tomcat_environment:
   - 'export JAVA_HOME={{ java_home }}'
   - 'export PATH=$PATH:{{ java_home }}/bin'
-  - 'export CATALINA_HOME={{ tomcat_arg.path }}'
+  - 'export CATALINA_HOME={{ tomcat_path }}/tomcat'
   - 'export CLASSPATH={{ java_home }}/jre/lib:{{ java_home }}/lib:{{ java_home }}/lib/tools.jar'
-  - 'export CLASSPATH=$CLASSPATH:{{ tomcat_arg.path }}/lib:.'
+  - 'export CLASSPATH=$CLASSPATH:{{ tomcat_path }}/tomcat/lib:.'
   - 'export LC_CTYPE="{{ tomcat_arg.lc_ctype }}"'
 
 restrict_path:
-  - '{{ tomcat_arg.path }}/bin'
-  - '{{ tomcat_arg.path }}/logs'
-  - '{{ tomcat_arg.path }}/temp'
-  - '{{ tomcat_arg.path }}/webapps'
+  - '{{ tomcat_path }}/tomcat/bin'
+  - '{{ tomcat_path }}/tomcat/logs'
+  - '{{ tomcat_path }}/tomcat/temp'
+  - '{{ tomcat_path }}/tomcat/webapps'
 
 service_privilege:
   - '%{{ tomcat_arg.user }} {{ inventory_hostname }}=/usr/bin/systemctl restart tomcat.service'

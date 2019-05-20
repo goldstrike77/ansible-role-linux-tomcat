@@ -10,11 +10,11 @@
     comment: '{{ tomcat_arg.user }}'
     uid: '{{ tomcat_arg.uid }}'
     group: '{{ tomcat_arg.user }}'
-    home: '{{ tomcat_arg.path }}'
+    home: '{{ tomcat_path }}/tomcat'
 
 - name: Configure BASH profile
   lineinfile:
-    dest: '{{ tomcat_arg.path }}/.bash_profile'
+    dest: '{{ tomcat_path }}/tomcat/.bash_profile'
     state: present
     line: '{{ item }}'
   loop: '{{ tomcat_environment }}'
@@ -22,7 +22,7 @@
 - name: Install Apache Tomcat {{ tomcat_version }} Core
   unarchive:
     src: '{{ tomcat_soft_url }}{{ tomcat_version[0:1] }}/v{{ tomcat_version }}/bin/apache-tomcat-{{ tomcat_version }}.tar.gz'
-    dest: '{{ tomcat_arg.path }}'
+    dest: '{{ tomcat_path }}/tomcat'
     owner: '{{ tomcat_arg.user }}'
     group: '{{ tomcat_arg.user }}'
     exclude: '{{ tomcat_exclusions }}'
@@ -43,9 +43,9 @@
     validate_certs: 'no'
     timeout: '60'
   loop:
-    - { src: 'catalina-jmx-remote.jar',  dest: '{{ tomcat_arg.path }}/lib/' }
-    - { src: 'tomcat-juli-adapters.jar', dest: '{{ tomcat_arg.path }}/lib/', create: "{{ tomcat_version[0:3] == '8.0' }}" }
-    - { src: 'tomcat-juli.jar',          dest: '{{ tomcat_arg.path }}/bin/', create: "{{ tomcat_version[0:3] == '8.0' }}" }
+    - { src: 'catalina-jmx-remote.jar',  dest: '{{ tomcat_path }}/tomcat/lib/' }
+    - { src: 'tomcat-juli-adapters.jar', dest: '{{ tomcat_path }}/tomcat/lib/', create: "{{ tomcat_version[0:3] == '8.0' }}" }
+    - { src: 'tomcat-juli.jar',          dest: '{{ tomcat_path }}/tomcat/bin/', create: "{{ tomcat_version[0:3] == '8.0' }}" }
   when: item.create | default(true) | bool
   register: tomcat_upgrade
   until: tomcat_upgrade is succeeded
@@ -55,7 +55,7 @@
 - name: Install support binary package
   copy:
     src: '{{ item }}'
-    dest: '{{ tomcat_arg.path }}/bin/'
+    dest: '{{ tomcat_path }}/tomcat/bin/'
     owner: '{{ tomcat_arg.user }}'
     group: '{{ tomcat_arg.user }}'
     mode: 0750
@@ -64,7 +64,7 @@
 - name: Install support JAR package
   copy:
     src: '{{ item }}'
-    dest: '{{ tomcat_arg.path }}/lib/'
+    dest: '{{ tomcat_path }}/tomcat/lib/'
     owner: '{{ tomcat_arg.user }}'
     group: '{{ tomcat_arg.user }}'
     mode: 0644

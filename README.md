@@ -49,6 +49,7 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `tomcat_selinux`: SELinux policy.
 * `java_home`: Environment variable to point to an installed JDK.
 * `system_service`: Path for system service file.
+* `tomcat_path`: Specify the Tomcat working directory.
 * `tomcat_syslog`:  A boolean value,  Enable or Disable console and access log to remote syslog server.
 * `tomcat_syslog_server`: IP address of syslog server.
 * `tomcat_syslog_port`: Port of syslog server.
@@ -84,7 +85,6 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `tomcat_arg.jvm_security_egd`: Random number generation library.
 * `tomcat_arg.lc_ctype`: The language of messages.
 * `tomcat_arg.minimumUmask`:The least restrictive umask for Security Lifecycle Listener.
-* `tomcat_arg.path`: Specify the Tomcat working directory.
 * `tomcat_arg.rmi_gcInterval`:RMI Forces periodic full collection interval in minutes.
 * `tomcat_arg.session_timeout`: Tomcat Session Timeout.
 * `tomcat_arg.sslciphersuite`: The SSL Ciphers.
@@ -135,6 +135,7 @@ You can also use the group_vars or the host_vars files for setting the variables
     tomcat_selinux: false
     java_home: '/usr/lib/jvm/java'
     system_service: '/lib/systemd/system'
+    tomcat_path: '/data'
     tomcat_syslog: false
     tomcat_syslog_server: '1.1.1.1'
     tomcat_syslog_port: '12201'
@@ -158,7 +159,6 @@ You can also use the group_vars or the host_vars files for setting the variables
       jvm_security_egd: '/dev/urandom'
       lc_ctype: 'zh_CN.UTF-8'
       minimumUmask: '0007'
-      path: '/data/tomcat'
       rmi_gcInterval: '28800'
       session_timeout: '10'
       sslciphersuite: 'ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256'

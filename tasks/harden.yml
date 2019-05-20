@@ -3,13 +3,13 @@
   block:
     - name: Uncompass the catalina Java ARchive
       unarchive:
-        src: '{{ tomcat_arg.path }}/lib/catalina.jar'
-        dest: '{{ tomcat_arg.path }}/lib'
+        src: '{{ tomcat_path }}/tomcat/lib/catalina.jar'
+        dest: '{{ tomcat_path }}/tomcat/lib'
         remote_src: yes
     - name: Erase tomcat version
       lineinfile:
         state: present
-        dest: '{{ tomcat_arg.path }}/lib/org/apache/catalina/util/ServerInfo.properties'
+        dest: '{{ tomcat_path }}/tomcat/lib/org/apache/catalina/util/ServerInfo.properties'
         regexp: '{{ item.regexp }}'
         line: '{{ item.line }}'
       loop:
@@ -17,14 +17,14 @@
         - { regexp: '^server.number', line: 'server.number=' }
         - { regexp: '^server.built',  line: 'server.built=' }
     - name: Compass the catalina Java ARchive 
-      shell: 'cd {{ tomcat_arg.path }}/lib && jar cf catalina.jar META-INF/ org/'
+      shell: 'cd {{ tomcat_path }}/tomcat/lib && jar cf catalina.jar META-INF/ org/'
     - name: Cleanup the uncompass file
       file:
         state: absent
         path: "{{ item }}"
       loop:
-        - '{{ tomcat_arg.path }}/lib/org'
-        - '{{ tomcat_arg.path }}/lib/META-INF'
+        - '{{ tomcat_path }}/tomcat/lib/org'
+        - '{{ tomcat_path }}/tomcat/lib/META-INF'
 
 - name: Restrict access to tomcat directory
   file:

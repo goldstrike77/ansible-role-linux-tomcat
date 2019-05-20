@@ -4,8 +4,8 @@ After=network.target
 
 [Service]
 Type=forking
-ExecStart={{ tomcat_arg.path }}/bin/tomcat.init start sysd
-ExecStop={{ tomcat_arg.path }}/bin/tomcat.init stop sysd
+ExecStart={{ tomcat_path }}/tomcat/bin/tomcat.init start sysd
+ExecStop={{ tomcat_path }}/tomcat/bin/tomcat.init stop sysd
 User={{ tomcat_arg.user }}
 LimitNOFILE={{ tomcat_arg.ulimit_nofile }}
 LimitNPROC={{ tomcat_arg.ulimit_nproc }}

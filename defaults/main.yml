@@ -5,6 +5,7 @@ tomcat_version: '8.5.40'
 tomcat_selinux: false # SELinux security policy.
 java_home: '/usr/lib/jvm/java'
 system_service: '/lib/systemd/system'
+tomcat_path: '/data' # Specify the Tomcat working directory
 tomcat_syslog: false
 tomcat_syslog_server: '1.1.1.1'
 tomcat_syslog_port: '12201'
@@ -18,6 +19,7 @@ tomcat_jvm_metaspace: '{% if ansible_memtotal_mb > 4096 and ansible_memtotal_mb 
 tomcat_jvm_xmn: '{{ ((ansible_memtotal_mb - 2048 ) * 0.6 * 0.2)|int }}' # Size of the heap for the young generation in MB.
 tomcat_jvm_xmx: '{{ ((ansible_memtotal_mb - 2048 ) * 0.6)|int }}' # Size of the heap in MB.
 tomcat_jvm_xss: '256' # Size of thread stack in KB.
+
 
 # Service Mesh #
 environments: 'SIT' # Define the service environment.
@@ -41,7 +43,6 @@ tomcat_arg:
   jvm_security_egd: '/dev/urandom' # Random number generation library
   lc_ctype: 'zh_CN.UTF-8' # The language of messages
   minimumUmask: '0007' # The least restrictive umask for Security Lifecycle Listener
-  path: '/data/tomcat' # Specify the Tomcat working directory
   rmi_gcInterval: '28800' # RMI Forces periodic full collection interval in minutes
   session_timeout: '10' # Tomcat Session Timeout
   sslciphersuite: 'ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256' # The SSL Ciphers
