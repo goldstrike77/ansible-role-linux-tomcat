@@ -55,7 +55,7 @@ tomcat_arg:
   wrapper_console_loglevel: 'INFO' # Log level to use for console output
   wrapper_java_command_loglevel: 'NONE' # Log level to use for Java command
   wrapper_logfile: 'catalina.out' # Sets the path to the Wrapper log file
-  wrapper_logfile_format: 'TM' # Format to use for logging to the log file
+  wrapper_logfile_format: 'ZM' # Format to use for logging to the log file
   wrapper_logfile_loglevel: 'INFO' # Filters messages sent to the log file according to their log levels
   wrapper_logfile_maxfiles: '25' # Controls the maximum number of rolled files
   wrapper_logfile_maxsize: '50m' # Controls the maximum size of rolled files
