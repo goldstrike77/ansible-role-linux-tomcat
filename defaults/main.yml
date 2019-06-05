@@ -1,7 +1,7 @@
 ---
 # General parameters #
 tomcat_is_install: false # A boolean value, whether install the Apache Tomcat.
-tomcat_version: '8.5.40'
+tomcat_version: '8.5.41'
 tomcat_selinux: false # SELinux security policy.
 tomcat_java_home: '/usr/lib/jvm/java'
 tomcat_path: '/data' # Specify the Tomcat working directory
