@@ -1,6 +1,6 @@
 ---
-tomcat_soft_url: 'http://archive.apache.org/dist/tomcat/tomcat-'
-#tomcat_soft_url: 'http://mirrors.tuna.tsinghua.edu.cn/apache/tomcat/tomcat-'
+#tomcat_soft_url: 'http://archive.apache.org/dist/tomcat/tomcat-'
+tomcat_soft_url: 'http://mirrors.tuna.tsinghua.edu.cn/apache/tomcat/tomcat-'
 
 tomcat_exclusions:
   - 'bin/commons-daemon-native.tar.gz'
