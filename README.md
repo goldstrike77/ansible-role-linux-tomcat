@@ -49,9 +49,6 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `tomcat_selinux`: SELinux policy.
 * `tomcat_java_home`: Environment variable to point to an installed JDK.
 * `tomcat_path`: Specify the Tomcat working directory.
-* `tomcat_syslog`:  A boolean value,  Enable or Disable console and access log to remote syslog server.
-* `tomcat_syslog_server`: IP address of syslog server.
-* `tomcat_syslog_port`: Port of syslog server.
 * `tomcat_jmxremote`: Enabling JMX Remote function.
 * `tomcat_web_protect`: Includeing Force SSL / Disable ETag / Allow-Methods / HSTS.
 * `tomcat_cookie_protect`: Set-Cookie HttpOnly & Secure response header.
@@ -69,6 +66,12 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `consul_public_exporter_token`: Public Consul client ACL token.
 * `consul_public_clients`: List of public consul clients.
 * `consul_public_http_port`: The consul HTTP API port.
+
+##### Syslog parameters
+* `syslog`: A boolean value,  Enable or Disable send console and access log to remote Syslog server.
+* `syslog_port`: Syslog server port.
+* `syslog_protocol`: Syslog server protocol.
+* `syslog_server`: List of syslog server list.
 
 #### Listen port
 * `tomcat_port_http`: The TCP port number of HTTP connectors.
@@ -134,9 +137,6 @@ You can also use the group_vars or the host_vars files for setting the variables
     tomcat_selinux: false
     tomcat_java_home: '/usr/lib/jvm/java'
     tomcat_path: '/data'
-    tomcat_syslog: false
-    tomcat_syslog_server: '1.1.1.1'
-    tomcat_syslog_port: '12201'
     tomcat_jmxremote: true
     tomcat_web_protect: true
     tomcat_cookie_protect: true
@@ -177,11 +177,17 @@ You can also use the group_vars or the host_vars files for setting the variables
       wrapper_logfile_maxsize: '50m'
       wrapper_syslog_loglevel: 'NONE'
       wrapper_ulimit_loglevel: 'STATUS'
+    syslog: false
+    syslog_port: '12201'
+    syslog_protocol: 'udp'
+    syslog_server:
+      - '127.0.0.1'
     environments: 'SIT'
     consul_public_register: false
     consul_public_exporter_token: '00000000-0000-0000-0000-000000000000'
-    consul_public_clients: 'localhost'
     consul_public_http_port: '8500'
+    consul_public_clients:
+      - '127.0.0.1'
 
 ## License
 

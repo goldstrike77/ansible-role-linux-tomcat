@@ -148,7 +148,7 @@
                prefix="localhost_access_log" suffix=".txt"
                pattern="%h %l %u %t &quot;%r&quot; %s %b" />
         -->
-{% if tomcat_syslog %}
+{% if syslog and ( syslog_protocol | lower == 'udp' ) %}
         <Valve className="org.apache.catalina.valves.GelfAccessLogValve" host="${syslog.addr}" port="${syslog.port}"
                pattern="%a %m %U %s %B %p %D %{X-Forwarded-For}i&quot;" />
 {% endif %}
