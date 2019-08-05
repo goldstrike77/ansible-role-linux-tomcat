@@ -58,7 +58,7 @@
     dest: '{{ tomcat_path }}/tomcat/bin/'
     owner: '{{ tomcat_arg.user }}'
     group: '{{ tomcat_arg.user }}'
-    mode: 0750
+    mode: '0750'
   loop: '{{ support_binary }}'
 
 - name: Install support JAR package
@@ -67,5 +67,5 @@
     dest: '{{ tomcat_path }}/tomcat/lib/'
     owner: '{{ tomcat_arg.user }}'
     group: '{{ tomcat_arg.user }}'
-    mode: 0644
+    mode: '0644'
   loop: '{{ support_jars }}'

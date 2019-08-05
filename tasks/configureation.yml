@@ -3,9 +3,10 @@
   template:
     src: '{{ item }}'
     dest: '{{ tomcat_path }}/tomcat/conf/'
+    backup: 'yes'
     owner: '{{ tomcat_arg.user }}'
     group: '{{ tomcat_arg.user }}'
-    mode: 0600
+    mode: '0600'
   loop: '{{ tomcat_conf }}'
   register: config_upgrade
 
@@ -15,7 +16,7 @@
     dest: '{{ tomcat_path }}/tomcat/conf/'
     owner: '{{ tomcat_arg.user }}'
     group: '{{ tomcat_arg.user }}'
-    mode: 0600
+    mode: '0600'
   loop: '{{ server_certificate }}'
   tags:
     - 'server_certificate_file'
@@ -27,7 +28,7 @@
     dest: '/etc/systemd/system'
     owner: 'root'
     group: 'root'
-    mode: 0644
+    mode: '0644'
   when:
     - ansible_distribution_major_version|int > 6
     - ansible_os_family == 'RedHat'
@@ -35,8 +36,8 @@
 - name: Tomcat service scripts symlink
   file:
     src: '{{ tomcat_path }}/tomcat/bin/tomcat.init'
-    path: /etc/init.d/tomcat
-    state: link
+    path: '/etc/init.d/tomcat'
+    state: 'link'
   when:
     - ansible_distribution_major_version|int < 7
     - ansible_os_family == 'RedHat'
@@ -47,4 +48,4 @@
     dest: '{{ tomcat_path }}/tomcat/webapps/ROOT/'
     owner: '{{ tomcat_arg.user }}'
     group: '{{ tomcat_arg.user }}'
-    mode: 0644
+    mode: '0644'

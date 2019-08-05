@@ -2,8 +2,8 @@
 - name: Enable tomcat service
   service:
     name: 'tomcat'
-    enabled: yes
-    state: restarted
+    enabled: 'yes'
+    state: 'restarted'
   async: 1
   poll: 0
   listen: Ensure tomcat service is enabled
@@ -12,9 +12,9 @@
 - name: Enable tomcat service
   systemd:
     name: 'tomcat.service'
-    enabled: yes
-    state: restarted
-    daemon_reload: yes
+    enabled: 'yes'
+    state: 'restarted'
+    daemon_reload: 'yes'
   async: 1
   poll: 0
   listen: Ensure tomcat service is enabled
@@ -22,8 +22,8 @@
 
 - name: Allow run service as non-root user on privileged via Systemd 
   lineinfile:
-    dest: /etc/sudoers
-    state: present
+    dest: '/etc/sudoers'
+    state: 'present'
     line: '{{ item }}'
   with_items:
     - '{{ service_privilege }}'

@@ -24,7 +24,10 @@
       when: tomcat_update is changed or tomcat_upgrade is changed or config_upgrade is changed or pki_upgrade is changed
     - name: Force the handler to run immediately
       meta: flush_handlers
-    - include_tasks: 'register.yml'
-      when: consul_public_register
+    - name: Registered with HashiCorp Consul
+      include: 'register.yml'
+      when: 
+        - exporter_is_install
+        - consul_public_register
   when:
     - tomcat_current_version.rc == 2 or tomcat_version not in tomcat_current_version.stdout
