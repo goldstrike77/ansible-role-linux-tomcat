@@ -1,4 +1,8 @@
 ---
+- name: Gathering service facts
+  service_facts:
+  register: services_state
+
 - name: Allow tomcat service port
   firewalld:
     port: '{{ item }}/tcp'
@@ -15,7 +19,9 @@
   - '{{ tomcat_port_wrapper }}'
   - '{{ tomcat_port_wrapper_jvm }}'
   register: firewalld_update
-  when: ansible_distribution_major_version|int > 6
+  when:
+    - ansible_distribution_major_version|int > 6
+    - services_state.ansible_facts.services["firewalld.service"].state == 'running'
 
 - name: Allow tomcat service port
   lineinfile:

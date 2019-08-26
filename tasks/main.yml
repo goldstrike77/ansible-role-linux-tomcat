@@ -27,7 +27,7 @@
     - name: Registered with HashiCorp Consul
       include: 'register.yml'
       when: 
-        - exporter_is_install
-        - consul_public_register
+        - exporter_is_install | bool
+        - consul_public_register | bool
   when:
     - tomcat_current_version.rc == 2 or tomcat_version not in tomcat_current_version.stdout

@@ -31,4 +31,4 @@
     - '{{ tomcat_port_server }}'
     - '{{ tomcat_port_wrapper }}'
     - '{{ tomcat_port_wrapper_jvm }}'
-  when: tomcat_selinux
+  when: tomcat_selinux | bool
