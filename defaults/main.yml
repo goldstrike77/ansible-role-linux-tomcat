@@ -17,6 +17,8 @@ tomcat_jvm_xmx: '{{ ((ansible_memtotal_mb - 2048 ) * 0.6)|int }}' # Size of the 
 tomcat_jvm_xss: '256' # Size of thread stack in KB.
 
 # Service Mesh #
+subscription: 'default' # Define the service subscription.
+region: 'default' # Define the service region.
 environments: 'SIT' # Define the service environment.
 exporter_is_install: false # Whether to install prometheus exporter.
 consul_public_register: false # Whether register a exporter service with public consul client.
