@@ -12,8 +12,11 @@
             <Field name="className" pattern="%C" />
             <Field name="fieldName2" literal="fieldValue2" />
             <Field name="mdcField2" mdc="mdcField2" />
-            <Field name="subscription" literal="{{ subscription | default('default') | upper }}" />
-            <Field name="region" literal="{{ region | default('default') | upper }}" />
+{% if tags is defined %}
+{% for key,value in tags.iteritems() %}
+            <Field name="{{ key }}" literal="{{ value }}" />
+{% endfor %}
+{% endif %}
             <Field name="environments" literal="{{ environments | default('SIT') | upper }}" />
             <Field name="group" literal="{{ group_names[0] | upper }}" />
             <DynamicMdcFields regex="mdc.*" />
