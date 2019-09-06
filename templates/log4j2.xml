@@ -5,7 +5,8 @@
             <PatternLayout pattern="%-5p - %m%n"/>
         </Console>
 {% if syslog %}
-        <Gelf name="gelf" host="${env:SYSLOG_PROT}:${env:SYSLOG_ADDR}" port="${env:SYSLOG_PORT}" version="1.1" extractStackTrace="true"
+        <Gelf name="gelf" host="${env:SYSLOG_PROT}:${env:SYSLOG_ADDR}" port="${env:SYSLOG_PORT}" version="1.1"
+              extractStackTrace="true" facility="tomcat-console"
               filterStackTrace="true" mdcProfiling="true" includeFullMdc="true" maximumMessageSize="8192" 
               originHost="%host{fqdn}" additionalFieldTypes="fieldName1=String,fieldName2=Double,fieldName3=Long"
               ignoreExceptions="true">
