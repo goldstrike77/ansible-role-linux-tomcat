@@ -7,16 +7,18 @@
 
 - name: Tomcat operation
   block:
-    - name: Include OS-specific variables
-      include_vars: '{{ ansible_os_family }}.yml'
     - name: Include tasks for specific OS
       include: '{{ ansible_os_family }}.yml'
     - name: Straight to getenforce selinux status
       include: 'selinux.yml'
-    - include: 'firewall.yml'
-    - include: 'install.yml'
-    - include: 'configureation.yml'
-    - include: 'harden.yml'
+    - name: Include firewall tasks
+      include: 'firewall.yml'
+    - name: Tomcat installation
+      include: 'install.yml'
+    - name: Tomcat configuration
+      include: 'configureation.yml'
+    - name: Tomcat hardening
+      include: 'harden.yml'
       when: tomcat_update is changed
     - name: Reload the tomcat service
       shell: echo ''

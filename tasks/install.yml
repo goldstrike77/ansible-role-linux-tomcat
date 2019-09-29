@@ -1,7 +1,7 @@
 ---
 - name: Add the group tomcat
   group:
-    name: "{{ tomcat_arg.user }}"
+    name: '{{ tomcat_arg.user }}'
     gid: '{{ tomcat_arg.uid }}'
 
 - name: Add the user tomcat
