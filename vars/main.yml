@@ -60,7 +60,7 @@ restrict_path:
   - '{{ tomcat_path }}/tomcat/webapps'
 
 service_privilege:
-  - '%{{ tomcat_arg.user }} {{ inventory_hostname }}=/usr/bin/systemctl restart tomcat.service'
-  - '%{{ tomcat_arg.user }} {{ inventory_hostname }}=/usr/bin/systemctl stop tomcat.service'
-  - '%{{ tomcat_arg.user }} {{ inventory_hostname }}=/usr/bin/systemctl start tomcat.service'
-  - '%{{ tomcat_arg.user }} {{ inventory_hostname }}=/usr/bin/systemctl status tomcat.service'
+  - '%{{ tomcat_arg.user }} {{ ansible_hostname }}=/usr/bin/systemctl restart tomcat.service'
+  - '%{{ tomcat_arg.user }} {{ ansible_hostname }}=/usr/bin/systemctl stop tomcat.service'
+  - '%{{ tomcat_arg.user }} {{ ansible_hostname }}=/usr/bin/systemctl start tomcat.service'
+  - '%{{ tomcat_arg.user }} {{ ansible_hostname }}=/usr/bin/systemctl status tomcat.service'

@@ -71,7 +71,7 @@
     <Connector port="{{ tomcat_port_http }}" protocol="org.apache.coyote.http11.Http11AprProtocol" xpoweredBy="false"
                maxThreads="{{ (ansible_memtotal_mb / 30)|int }}" enableLookups="false" redirectPort="{{ tomcat_port_https }}"
                acceptCount="50" connectionTimeout="20000" useBodyEncodingForURI="true" allowTrace="false" 
-               URIEncoding="UTF-8" disableUploadTimeout="true" server="secure-{{ 59 |random(seed=inventory_hostname) }}{{ inventory_hostname|upper|b64encode|b64encode|replace('==', '') }}"
+               URIEncoding="UTF-8" disableUploadTimeout="true" server="secure-{{ 59 |random(seed=ansible_hostname) }}{{ ansible_hostname|upper|b64encode|b64encode|replace('==', '') }}"
                compression="on" compressionMinSize="2048" noCompressionUserAgents="gozilla,traviata"
                compressableMimeType = "text/html,text/xml,text/css,application/javascript,text/plain"/>
     <!-- A "Connector" using the shared thread pool-->
@@ -88,7 +88,7 @@
          documentation -->
     <Connector maxThreads="{{ (ansible_memtotal_mb / 30)|int }}" port="{{ tomcat_port_https }}" protocol="org.apache.coyote.http11.Http11AprProtocol"
                enableLookups="false" acceptCount="50" connectionTimeout="20000" xpoweredBy="false"
-               server="secure-{{ 59 |random(seed=inventory_hostname) }}{{ inventory_hostname|upper|b64encode|b64encode|replace('==', '') }}" secure="true" allowTrace="false"
+               server="secure-{{ 59 |random(seed=ansible_hostname) }}{{ ansible_hostname|upper|b64encode|b64encode|replace('==', '') }}" secure="true" allowTrace="false"
                URIEncoding="UTF-8" disableUploadTimeout="true" useBodyEncodingForURI="true"
                compression="on" compressionMinSize="2048" noCompressionUserAgents="gozilla,traviata"
                compressableMimeType = "text/html,text/xml,text/css,application/javascript,text/plain"
